@@ -13,7 +13,7 @@ function Navbar() {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-6 text-gray-700 text-[18px] font-medium">
-          {["Home", "Events", "My Tickets", "Offers", "Contact"].map((item) => (
+          {["Home", "My Events", "My Tickets", "Offers", "Contact"].map((item) => (
             <li
               key={item}
               className="cursor-pointer relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full hover:text-blue-500"

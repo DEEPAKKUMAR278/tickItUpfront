@@ -2,7 +2,8 @@ import { useForm } from "react-hook-form";
 import Input from "../components/Input";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
+import { useEffect } from "react";
 
 export default function LoginPage() {
   const {
@@ -10,14 +11,26 @@ export default function LoginPage() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const user=useQuery({queryKey:['getUser'],queryFn:async()=>{
-    await axios.get('/api/v1/users/login',{
-      withCredentials:true
-    })
-  }})
+ const loginUser=useMutation({
+  mutationFn:async ({userName,password})=>{
+      const resp=await axios.post('/api/v1/users/login',{
+        userName:userName,
+        password
+      })
+      return resp.data.data.user;
+  },
+  onSuccess:(data)=>{
+    localStorage.setItem("user",JSON.stringify(data));
+    navigate("../");
+  },
+  onError:(error)=>{
+    console.log(error);
+    alert("Login failed: invalid user credentials");
+  }
+})
   const navigate=useNavigate();
   const onSubmit = (data) => {
-    console.log(data);
+    loginUser.mutate(data);
   };
 
   return (

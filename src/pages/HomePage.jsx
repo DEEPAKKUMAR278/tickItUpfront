@@ -11,7 +11,9 @@ function HomePage() {
         withCredentials:true
       });
       return res.data;
-    }});
+    },
+      refetchOnWindowFocus:false  
+  });
     if(!isLoading){
     return (
         <>
@@ -69,7 +71,7 @@ function HomePage() {
           {
             data&&data.data.map((ticket)=>(
               <div key={ticket._id}>
-                <EventCard eventName={ticket.eventName} description={ticket.description} venue={ticket.venue} price={ticket.price} backgroundImage={ticket.backgroundImage} />
+                <EventCard eventName={ticket.eventName} description={ticket.description} venue={ticket.venue} price={ticket.price} backgroundImage={ticket.backgroundImage} ticketTempId={ticket._id} />
               </div>
             ))
           }
