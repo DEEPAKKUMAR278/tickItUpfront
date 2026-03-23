@@ -6,6 +6,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import Loader from "../components/Loader";
 import socket from "../sockets/socket";
+import Ticket from "../components/Ticket";
 function HomePage() {
   useEffect(() => {
     // console.log(import.meta.env.VITE_API_URL);
