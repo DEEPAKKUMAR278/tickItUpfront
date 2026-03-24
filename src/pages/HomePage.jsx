@@ -6,6 +6,7 @@ import axios from "axios";
 import Loader from "../components/Loader";
 import socket from "../sockets/socket";
 import Ticket from "../components/Template";
+import Ticket from "../components/Ticket";
 
 function HomePage() {
   const [selectedTicket, setSelectedTicket] = useState(null);

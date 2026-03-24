@@ -21,7 +21,7 @@ class authService {
         "Content-Type": "multipart/form-data",
       },
     });
-    this.login({ userName, password });
+    await this.login({ userName, password });
     return response;
   };
   login = async ({ userName, password }) => {
@@ -29,7 +29,9 @@ class authService {
       const resp = await axios.post(import.meta.env.VITE_API_URL + "/api/v1/users/login", {
         userName: userName,
         password,
-      });
+      },
+      {withCredentials: true}
+    );
       useAuthStore.getState().setUser(resp.data.data.user);
       return resp.data.data.user;
     } catch (error) {
